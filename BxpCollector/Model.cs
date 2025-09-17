@@ -85,7 +85,7 @@ class Player
                     "application/json"
                 );
 
-                var postRes = await client_.PostAsync("http://localhost:4000/insert", json);
+                var postRes = await client_.PostAsync(Config.Server + "/insert", json);
                 postRes.EnsureSuccessStatusCode();
 
                 return;

@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 
 string currentDir = AppContext.BaseDirectory;
 string[] folders = Directory.GetDirectories(currentDir);
@@ -57,4 +58,11 @@ while (true)
     }
 
     await Task.Delay(10000);
+}
+
+class Config
+{
+    public static string Server = Debugger.IsAttached
+        ? "http://localhost:4000"
+        : "http://172.232.156.69:4000";
 }
