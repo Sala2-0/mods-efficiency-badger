@@ -1,3 +1,6 @@
 /.vs
 /BxpCollector/bin
 /BxpCollector/obj
+*/node_modules
+*.db
+*.js
