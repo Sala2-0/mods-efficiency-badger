@@ -6,7 +6,6 @@ string[] folders = Directory.GetDirectories(currentDir);
 string replaysPath;
 
 string currentGame = string.Empty;
-Player[] players;
 
 if (!folders.Contains("replays") || folders.Length == 0)
 {
@@ -27,6 +26,8 @@ if (!folders.Contains("replays") || folders.Length == 0)
 else
     replaysPath = Path.Combine(currentDir, "replays");
 
+Console.WriteLine("Active");
+
 while (true)
 {
     foreach (string file in Directory.GetFiles(replaysPath))
@@ -44,7 +45,7 @@ while (true)
         JsonElement doc = JsonDocument.Parse(root).RootElement;
         string content = doc.GetProperty("vehicles").GetRawText();
 
-        players = JsonSerializer.Deserialize<Player[]>(content)!;
+        Player[] players = JsonSerializer.Deserialize<Player[]>(content)!;
 
         foreach (var player in players)
         {

@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -70,7 +71,23 @@ class Player
 
             if (apiBaseExp > baseExp_)
             {
-                Console.WriteLine($"Player '{Name}' got {apiBaseExp - baseExp_} base XP for ship '{ShipId}'");
+                int baseExpDiff = apiBaseExp - baseExp_;
+
+                Console.WriteLine($"Player '{Name}' got {baseExpDiff} base XP for ship '{ShipId}'");
+
+                using StringContent json = new(
+                    JsonSerializer.Serialize(new
+                    {
+                        shipId = ShipId,
+                        baseExp = baseExpDiff
+                    }),
+                    Encoding.UTF8,
+                    "application/json"
+                );
+
+                var postRes = await client_.PostAsync("http://localhost:4000/insert", json);
+                postRes.EnsureSuccessStatusCode();
+
                 return;
             }
 
