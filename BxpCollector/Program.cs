@@ -31,7 +31,7 @@ Console.WriteLine("Active");
 
 while (true)
 {
-    foreach (string file in Directory.GetFiles(replaysPath))
+    foreach (string file in Directory.GetFiles(replaysPath, "*", SearchOption.AllDirectories))
     {
         string extentionName = file.Split('.')[1];
         if (extentionName != "json")
